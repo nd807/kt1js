@@ -2,12 +2,13 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>КТ 1 Дугин</title>
+<title>Таблица</title>
 <style>
     table {
         border-collapse: collapse;
         margin-top: 20px;
     }
+
     td {
         width: 50px;
         height: 40px;
@@ -15,6 +16,7 @@
         border: 1px solid black;
         font-weight: bold;
     }
+
     .orange {
         background-color: orange;
     }
@@ -27,58 +29,23 @@
 <table id="myTable"></table>
 
 <script>
-    let numbers = [];
+function addNumber() {
+    let randomNumber = Math.floor(Math.random() * 100);
 
-    function generateArray() {
-        numbers = [];
-        for (let i = 0; i < 30; i++) {
-            numbers.push(Math.floor(Math.random() * 100));
-        }
+    const table = document.getElementById("myTable");
+
+    let row = document.createElement("tr");
+    let cell = document.createElement("td");
+
+    cell.textContent = randomNumber;
+
+    if (randomNumber > 50) {
+        cell.classList.add("orange");
     }
 
-    function createTable() {
-        const table = document.getElementById("myTable");
-        table.innerHTML = ""; 
-
-        let index = 0;
-
-        for (let i = 0; i < 5; i++) {
-            let row = document.createElement("tr");
-
-            for (let j = 0; j < 6; j++) {
-                let cell = document.createElement("td");
-                let value = numbers[index];
-
-                cell.textContent = value;
-
-                if (value >= 50) {
-                    cell.classList.add("orange");
-                }
-
-                row.appendChild(cell);
-                index++;
-            }
-
-            table.appendChild(row);
-        }
-    }
-
-    function addNumber() {
-        let randomNumber = Math.floor(Math.random() * 100);
-        numbers.push(randomNumber);
-
-        const table = document.getElementById("myTable");
-        const cells = table.getElementsByTagName("td");
-
-        if (cells.length < 30) return;
-
-        numbers.shift();
-
-        createTable();
-    }
-
-    generateArray();
-    createTable();
+    row.appendChild(cell);
+    table.appendChild(row);
+}
 </script>
 
 </body>
